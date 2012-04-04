@@ -1,9 +1,9 @@
 <div id="gbsthumbnail" class="book_jacket"></div>
 
-<script type="text/javascript">
+<script>
   function addTheCover(booksInfo){
     var link = '<%= image_tag("unknown_resource.png", :size => "150x150", :alt => "*") %>';
-    for (i in booksInfo) {
+    for (var i in booksInfo) {
       var book = booksInfo[i];
       if (book.thumbnail_url != undefined)  {
         link = '<img src="' + book.thumbnail_url.replace('zoom=5', 'zoom=1') + '"/>';
@@ -13,4 +13,4 @@
   }
 </script>
 
-<script src="http://books.google.com/books?jscmd=viewapi&bibkeys=ISBN:<%= manifestation.isbn %>&callback=addTheCover"></script>
+<script src="http://books.google.com/books?jscmd=viewapi&amp;bibkeys=ISBN:<%= manifestation.isbn %>&amp;callback=addTheCover"></script>
