@@ -9,7 +9,7 @@
     for (var i in booksInfo) {
       var book = booksInfo[i];
       if (book.thumbnail_url != undefined)  {
-        link = '<img src="' + book.thumbnail_url.replace('zoom=5', 'zoom=1') + '"/>';
+        link = '<img src="' + book.thumbnail_url.replace('zoom=5', 'zoom=1') + '" alt="<%= manifestation.original_title %>" />';
       }
     }
     document.getElementById('gbsthumbnail').innerHTML = link;
