@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 5) do
+ActiveRecord::Schema.define(:version => 20110916091020) do
 
   create_table "manifestations", :force => true do |t|
     t.text     "original_title",                              :null => false
@@ -42,9 +42,9 @@ ActiveRecord::Schema.define(:version => 5) do
     t.string   "issn"
     t.integer  "price"
     t.text     "fulltext"
-    t.string   "volume_number_list"
-    t.string   "issue_number_list"
-    t.string   "serial_number_list"
+    t.string   "volume_number_string"
+    t.string   "issue_number_string"
+    t.string   "serial_number_string"
     t.integer  "edition"
     t.text     "note"
     t.integer  "produces_count",           :default => 0,     :null => false
@@ -58,6 +58,9 @@ ActiveRecord::Schema.define(:version => 5) do
     t.integer  "required_score",           :default => 0,     :null => false
     t.integer  "frequency_id",             :default => 1,     :null => false
     t.boolean  "subscription_master",      :default => false, :null => false
+    t.integer  "volume_number"
+    t.integer  "issue_number"
+    t.integer  "serial_number"
   end
 
   add_index "manifestations", ["access_address"], :name => "index_manifestations_on_access_address"
