@@ -1,5 +1,31 @@
 module EnjuBookJacket
   module BookJacketHelper
+    def book_jacket(manifestation)
+      if manifestation.picture_files.exists?
+        link = ''
+        manifestation.picture_files.each_with_index do |picture_file, i|
+          if i == 0
+            link += link_to(show_image(picture_file, :size => :thumb), picture_file_path(picture_file, :format => :download), :rel => "manifestation_#{manifestation.id}")
+          else
+            link += content_tag :span, :style => "display: none" do
+              link_to(show_image(picture_file, :size => :thumb), picture_file_path(picture_file, :format => :download), :rel => "manifestation_#{manifestation.id}")
+            end
+          end
+        end
+        return link.html_safe
+      else
+        link = book_jacket_tag(manifestation)
+        unless link
+          link = screenshot_tag(manifestation)
+        end
+      end
+
+      unless link
+        link = link_to image_tag('unknown_resource.png', :width => '100', :height => '100', :alt => '*', :itemprop => 'image'), manifestation
+      end
+      link
+    end
+
     def screenshot_tag(manifestation, generator = configatron.screenshot.generator)
       return nil unless manifestation.try(:access_address)
       case generator
