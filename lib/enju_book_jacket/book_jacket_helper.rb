@@ -26,7 +26,7 @@ module EnjuBookJacket
       link
     end
 
-    def screenshot_tag(manifestation, generator = configatron.screenshot.generator)
+    def screenshot_tag(manifestation, generator = Setting.screenshot.generator)
       return nil unless manifestation.try(:access_address)
       case generator
       when :mozshot
@@ -40,27 +40,27 @@ module EnjuBookJacket
       end
     end
 
-    def book_jacket_tag(manifestation, generator = configatron.book_jacket.source)
+    def book_jacket_tag(manifestation, generator = Setting.book_jacket.source)
       return nil unless manifestation
       case generator
       when :amazon
-        return nil unless configatron.amazon.hostname
+        return nil unless Setting.amazon.hostname
         book_jacket = manifestation.amazon_book_jacket
         if book_jacket
-          link_to image_tag(book_jacket[:url], :width => book_jacket[:width], :height => book_jacket[:height], :alt => manifestation.original_title, :class => 'book_jacket', :itemprop => 'image'), "http://#{configatron.amazon.hostname}/dp/#{book_jacket[:asin]}"
+          link_to image_tag(book_jacket[:url], :width => book_jacket[:width], :height => book_jacket[:height], :alt => manifestation.original_title, :class => 'book_jacket', :itemprop => 'image'), "http://#{Setting.amazon.hostname}/dp/#{book_jacket[:asin]}"
         end
       when :google
         render :partial => 'manifestations/google_book_thumbnail', :locals => {:manifestation => manifestation}
       end
     end
 
-    def amazon_link(asin, hostname = configatron.amazon.hostname)
+    def amazon_link(asin, hostname = Setting.amazon.hostname)
       return nil if asin.blank?
       "http://#{hostname}/dp/#{asin}"
     end
 
     def book_jacket_source_link
-      case configatron.book_jacket.source
+      case Setting.book_jacket.source
       when :google
         link_to "Google Books", "http://books.google.com/"
       when :amazon
@@ -69,7 +69,7 @@ module EnjuBookJacket
     end
 
     def screenshot_generator_link
-      case configatron.screenshot.generator
+      case Setting.screenshot.generator
       when :mozshot
         link_to "MozShot", "http://mozshot.nemui.org/"
       when :simpleapi

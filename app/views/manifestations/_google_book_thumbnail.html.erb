@@ -3,8 +3,8 @@
 <script>
   function addTheCover(booksInfo){
     var link = '<%= image_tag("unknown_resource.png", :size => "150x150", :alt => "*") %>';
-    <% unless configatron.manifestation_book_jacket.unknown_resource.blank? %>
-      link = '<%= configatron.manifestation_book_jacket.unknown_resource %>'
+    <% unless Setting.book_jacket.unknown_resource.blank? %>
+      link = '<%= Setting.book_jacket.unknown_resource %>'
     <% end %>
     for (var i in booksInfo) {
       var book = booksInfo[i];
