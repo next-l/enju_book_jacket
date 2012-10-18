@@ -1,19 +1,35 @@
-<div id="gbsthumbnail" class="book_jacket"></div>
+<% if manifestation.isbn? %>
+  <div id="gbsthumbnail" style="width: 160px; height: 250px"></div>
 
-<script>
-  function addTheCover(booksInfo){
-    var link = '<%= image_tag("unknown_resource.png", :size => "150x150", :alt => "*") %>';
-    <% unless Setting.book_jacket.unknown_resource.blank? %>
-      link = '<%= Setting.book_jacket.unknown_resource %>'
-    <% end %>
-    for (var i in booksInfo) {
-      var book = booksInfo[i];
-      if (book.thumbnail_url != undefined)  {
-        link = '<img src="' + book.thumbnail_url.replace('zoom=5', 'zoom=1') + '" alt="<%= manifestation.original_title %>" />';
+  <script type="text/javascript">
+    function addTheCover(booksInfo){
+      var link = '<%= image_tag("unknown_resource.png", :size => "150x150", :alt => "*") %>';
+      <% unless Setting.book_jacket.unknown_resource.blank? %>
+        link = '<%= Setting.book_jacket.unknown_resource %>'
+      <% end %>
+      for (i in booksInfo.items) {
+        var book = booksInfo.items[i]
+        var image = book.volumeInfo.imageLinks;
+        if (image && image.thumbnail != undefined) {
+          var thumbnail = image.thumbnail.replace('zoom=5', 'zoom=1');
+          if ( document.location.protocol == 'https:' ) {
+            var parser = document.createElement('a');
+            parser.href = thumbnail;
+            parser.protocol = 'https:';
+            parser.hostname = 'encrypted.google.com';
+            thumbnail = parser.href;
+          }
+          var link = '<img src="' + thumbnail + '" alt="<%= manifestation.original_title %>" />';
+          if (book.accessInfo && book.accessInfo.viewability != "NO_PAGES") {
+            var preview = book.volumeInfo.previewLink;
+            link += '<br /><a href="' + preview + '" target="_blank"><img border=0 src="//www.google.com/googlebooks/images/gbs_preview_button1.gif" title="Google Preview" alt="Google Preview" /></a>';
+          }
+          document.getElementById('gbsthumbnail').innerHTML = link;
+        }
       }
     }
-    document.getElementById('gbsthumbnail').innerHTML = link;
-  }
-</script>
-
-<script src="http://books.google.com/books?jscmd=viewapi&amp;bibkeys=ISBN:<%= manifestation.isbn %>&amp;callback=addTheCover"></script>
+  </script>
+  <script src="https://www.googleapis.com/books/v1/volumes?q=isbn:<%= manifestation.isbn %>&amp;callback=addTheCover"></script>
+<% else %>
+  <%= image_tag("unknown_resource.png", :size => "150x150", :alt => "*") %>
+<% end %>
