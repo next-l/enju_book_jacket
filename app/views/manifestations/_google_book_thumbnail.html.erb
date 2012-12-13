@@ -3,8 +3,10 @@
 
   <script type="text/javascript">
     function addTheCover(booksInfo){
-      var link = '<%= image_tag("unknown_resource.png", :size => "150x150", :alt => "*") %>';
-      <% unless Setting.book_jacket.unknown_resource.blank? %>
+      var link = '';
+      <% if Setting.book_jacket.unknown_resource.blank? %>
+        link = '<%= image_tag("unknown_resource.png", :size => "150x150", :alt => "*") %>';
+      <% else %>
         link = '<%= Setting.book_jacket.unknown_resource %>'
       <% end %>
       for (i in booksInfo.items) {
