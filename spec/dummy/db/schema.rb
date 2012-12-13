@@ -30,9 +30,9 @@ ActiveRecord::Schema.define(:version => 20110916091020) do
     t.integer  "extent_id",                :default => 1,     :null => false
     t.integer  "start_page"
     t.integer  "end_page"
-    t.decimal  "height"
-    t.decimal  "width"
-    t.decimal  "depth"
+    t.integer  "height"
+    t.integer  "width"
+    t.integer  "depth"
     t.string   "isbn"
     t.string   "isbn10"
     t.string   "wrong_isbn"
@@ -47,10 +47,6 @@ ActiveRecord::Schema.define(:version => 20110916091020) do
     t.string   "serial_number_string"
     t.integer  "edition"
     t.text     "note"
-    t.integer  "produces_count",           :default => 0,     :null => false
-    t.integer  "exemplifies_count",        :default => 0,     :null => false
-    t.integer  "embodies_count",           :default => 0,     :null => false
-    t.integer  "work_has_subjects_count",  :default => 0,     :null => false
     t.boolean  "repository_content",       :default => false, :null => false
     t.integer  "lock_version",             :default => 0,     :null => false
     t.integer  "required_role_id",         :default => 1,     :null => false
