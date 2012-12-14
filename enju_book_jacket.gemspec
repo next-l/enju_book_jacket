@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = EnjuBookJacket::VERSION
   s.authors     = ["Kosuke Tanabe"]
   s.email       = ["tanabe@mwr.mediacom.keio.ac.jp"]
-  s.homepage    = "https://github.com/nabeta/enju_book_jacket"
+  s.homepage    = "https://github.com/next-l/enju_book_jacket"
   s.summary     = "enju_book_jacket plugin"
   s.description = "Display book jackets on Next-L Enju"
 
