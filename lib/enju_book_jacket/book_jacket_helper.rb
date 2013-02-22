@@ -68,6 +68,16 @@ module EnjuBookJacket
       end
     end
 
+    def book_jacket_header(source)
+      string = ''
+      case source
+      when :google
+        string << javascript_tag(nil, :src => "https://www.google.com/jsapi")
+        string << render('manifestations/google_book_thumbnail_header')
+      end
+      string.html_safe
+    end
+
     def screenshot_generator_link
       case Setting.screenshot.generator
       when :mozshot
