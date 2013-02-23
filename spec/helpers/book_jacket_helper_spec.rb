@@ -13,17 +13,18 @@ require 'spec_helper'
 # end
 describe EnjuBookJacket::BookJacketHelper do
   fixtures :manifestations
-  use_vcr_cassette "enju_book_jacket", :record => :new_episodes
+  VCR.use_cassette "enju_book_jacket", :record => :new_episodes do
 
-  it "should get screenshot" do
-    helper.screenshot_tag(manifestations(:manifestation_00003)).should eq "<a href=\"http://www.slis.keio.ac.jp/\"><img alt=\"これからの生命科学研究者のためのバイオ特許入門講座\" border=\"0\" height=\"128\" itemprop=\"image\" src=\"http://mozshot.nemui.org/shot?http://www.slis.keio.ac.jp/\" width=\"128\" /></a>"
-  end
+    it "should get screenshot" do
+      helper.screenshot_tag(manifestations(:manifestation_00003)).should eq "<a href=\"http://www.slis.keio.ac.jp/\"><img alt=\"これからの生命科学研究者のためのバイオ特許入門講座\" border=\"0\" height=\"128\" itemprop=\"image\" src=\"http://mozshot.nemui.org/shot?http://www.slis.keio.ac.jp/\" width=\"128\" /></a>"
+    end
 
-  it "should get book jacket" do
-    helper.book_jacket_tag(manifestations(:manifestation_00001)).should =~ /<div id=\"gbsthumbnail\" class=\"book_jacket\"><\/div>/
-  end
+    it "should get book jacket" do
+      helper.book_jacket_tag(manifestations(:manifestation_00001)).should =~ /<div id=\"gbsthumbnail\" class=\"book_jacket\"><\/div>/
+    end
 
-  it "should generate a link to Amazon" do
-    helper.amazon_link(manifestations(:manifestation_00001).isbn).should =~ /http:\/\/www.amazon.co.jp\/dp\/4798002062/
+    it "should generate a link to Amazon" do
+      helper.amazon_link(manifestations(:manifestation_00001).isbn).should =~ /http:\/\/www.amazon.co.jp\/dp\/4798002062/
+    end
   end
 end
