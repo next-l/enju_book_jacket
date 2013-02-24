@@ -12,6 +12,7 @@
             parser.href = thumbnail;
             parser.protocol = 'https:';
             parser.hostname = 'encrypted.google.com';
+            thumbnail = parser.href;
           }
           if (thumbnail) {
             var link = '<img src="' + thumbnail + '" alt="' + book.volumeInfo.title + '" />';
