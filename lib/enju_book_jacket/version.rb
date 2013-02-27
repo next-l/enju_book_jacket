@@ -1,3 +1,3 @@
 module EnjuBookJacket
-  VERSION = "0.1.0.pre5"
+  VERSION = "0.1.0.pre6"
 end
