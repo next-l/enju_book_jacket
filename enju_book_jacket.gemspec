@@ -21,6 +21,6 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "rspec-rails"
-  s.add_development_dependency "enju_biblio", "~> 0.1.0.pre19"
+  s.add_development_dependency "enju_biblio", "~> 0.1.0.pre23"
   s.add_development_dependency "vcr"
 end
